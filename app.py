@@ -2,21 +2,14 @@ from flask import Flask, render_template
 from config import Config
 from models import db, Car
 from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
-admin = Admin(app)
 
-@admin.register_view
-def user_list():
-    return {
-        'label': 'Пользователи',
-        'endpoint': 'user',
-        'view_type': 'datatable',
-        'columns': ['id', 'username', 'email'],
-        'searchable_columns': ['username', 'email']
-    }
+admin = Admin(app, name='MyAdmin', template_mode='bootstrap3')
+admin.add_view(ModelView(Car, db.session))
 
 @app.before_request
 def create_tables():
@@ -31,7 +24,6 @@ def create_tables():
 def check_db():
     cars = Car.query.all()
     return f'Found {len(cars)} cars in the database'
-
 
 @app.route('/')
 def home():
@@ -53,5 +45,3 @@ def car_detail(car_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
