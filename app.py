@@ -1,0 +1,57 @@
+from flask import Flask, render_template
+from config import Config
+from models import db, Car
+from flask_admin import Admin
+
+app = Flask(__name__)
+app.config.from_object(Config)
+db.init_app(app)
+admin = Admin(app)
+
+@admin.register_view
+def user_list():
+    return {
+        'label': 'Пользователи',
+        'endpoint': 'user',
+        'view_type': 'datatable',
+        'columns': ['id', 'username', 'email'],
+        'searchable_columns': ['username', 'email']
+    }
+
+@app.before_request
+def create_tables():
+    db.create_all()
+    if not Car.query.first():
+        car1 = Car(name='BMW X5', image='x5.jpg', description='Описание BMW X5M')
+        car2 = Car(name='BMW M3', image='m3.jpg', description='Описание BMW M3')
+        db.session.add_all([car1, car2])
+        db.session.commit()
+
+@app.route('/check_db')
+def check_db():
+    cars = Car.query.all()
+    return f'Found {len(cars)} cars in the database'
+
+
+@app.route('/')
+def home():
+    cars = Car.query.all()
+    return render_template('home.html', title="Home", cars=cars)
+
+@app.route('/about')
+def about():
+    return render_template('about.html', title="About BMW")
+
+@app.route('/rules')
+def rules():
+    return render_template('rules.html', title="Site Rules")
+
+@app.route('/car/<int:car_id>')
+def car_detail(car_id):
+    car = Car.query.get_or_404(car_id)
+    return render_template('car_detail.html', car=car)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+

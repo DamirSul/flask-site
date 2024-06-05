@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ car.name }}{% endblock %}
+
+{% block content %}
+    <div class="car-detail">
+        <h2>{{ car.name }}</h2>
+        <img src="{{ url_for('static', filename='images/' ~ car.image) }}" alt="{{ car.name }}">
+        <p>{{ car.description }}</p>
+    </div>
+{% endblock %}

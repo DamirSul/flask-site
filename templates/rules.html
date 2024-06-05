@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="rules my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Site Rules</h1>
+            <ul>
+                <li>Be respectful to other users.</li>
+                <li>No spam or advertising.</li>
+                <li>Keep discussions related to BMW vehicles.</li>
+                <li>Follow all local laws and regulations.</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='bmw_rules.png') }}" alt="Rules" class="img-fluid">
+        </div>
+    </div>
+</section>
+{% endblock %}
+

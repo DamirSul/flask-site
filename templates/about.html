@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="about my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>About BMW</h1>
+            <p>
+                BMW (Bayerische Motoren Werke AG) is a German multinational company that produces luxury vehicles and motorcycles. 
+                The company was founded in 1916 and has its headquarters in Munich, Bavaria. 
+                BMW is known for its performance and luxury vehicles and is a global leader in premium car sales.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='bmw_about.png') }}" alt="About BMW" class="img-fluid">
+        </div>
+    </div>
+</section>
+{% endblock %}
