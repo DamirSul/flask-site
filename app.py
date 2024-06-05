@@ -11,14 +11,6 @@ db.init_app(app)
 admin = Admin(app, name='MyAdmin', template_mode='bootstrap3')
 admin.add_view(ModelView(Car, db.session))
 
-@app.before_request
-def create_tables():
-    db.create_all()
-    if not Car.query.first():
-        car1 = Car(name='BMW X5', image='x5.jpg', description='Описание BMW X5M')
-        car2 = Car(name='BMW M3', image='m3.jpg', description='Описание BMW M3')
-        db.session.add_all([car1, car2])
-        db.session.commit()
 
 @app.route('/check_db')
 def check_db():
