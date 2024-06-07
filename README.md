@@ -1,1 +1,1 @@
-![image](https://github.com/DamirSul/flask-site/assets/143865146/870c4019-1859-40b1-aebf-35c72963978a)
+![image](https://github.com/DamirSul/flask-site/assets/143865146/9a15c676-8695-4677-9d76-682092ea6e91)
