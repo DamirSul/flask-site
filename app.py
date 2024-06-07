@@ -45,7 +45,7 @@ def get_response():
     user_message = request.json.get('message')
 
     prompt = {
-        "modelUri": 'gpt://b1g08aeibsag481ubbgv/yandexgpt-lite',
+        "modelUri": 'gpt://secret/yandexgpt-lite',
         "completionOptions": {
             "stream": False,
             "temperature": 0.6,
@@ -67,7 +67,7 @@ def get_response():
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Api-Key AQVN2BNQ8pRiUInhI6HBPnneIp5LTFBWFrG_4KQD"
+        "Authorization": "Api-Key secret"
     }
 
     response = requests.post("https://llm.api.cloud.yandex.net/foundationModels/v1/completion", headers=headers, json=prompt)
